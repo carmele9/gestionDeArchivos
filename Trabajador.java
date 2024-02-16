@@ -1,5 +1,5 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
 * La clase Trabajador instancia un trabajador de un departamento de una empresa
@@ -13,7 +13,7 @@ public class Trabajador extends Persona{
     private Departamento departamento;
     private float salario;
     private String numeroSS;
-    private LocalDate fechaAlta;
+    private Date fechaAlta;
     private boolean esResponsable;
 
     /**
@@ -92,8 +92,8 @@ public class Trabajador extends Persona{
      * @return fechaAlta
      * */
     public String getFechaAlta() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return fechaAlta.format(formatter);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(this.fechaAlta);
     }
 
     /**
@@ -102,8 +102,8 @@ public class Trabajador extends Persona{
      */
     public void setFechaAlta(String fechaAlta) {
         try {
-            DateTimeFormatter formatoDDMM = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            this.fechaAlta= LocalDate.parse(fechaAlta, formatoDDMM);
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            this.fechaAlta = formato.parse(fechaAlta);
 
         } catch (Exception e) {
             System.out.println("la fecha de alta " + fechaAlta + " no sigue con el formato dd/MM/yyyy");

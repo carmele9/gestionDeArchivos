@@ -1,5 +1,6 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 
 /**
  * La clase Persona instancia una persona que configurará caracteristicas basicas de un trabajador
@@ -13,7 +14,7 @@ public abstract class Persona {
     // Propiedades se la clase principal
     protected String nombreCompleto;
     protected char sexo;
-    protected LocalDate fechaNacimiento;
+    protected Date fechaNacimiento;
     protected int telefono;
     protected String correoElectronico;
 
@@ -63,8 +64,8 @@ public abstract class Persona {
      * @return fechaNacimiento
      */
     protected String getFechaNacimiento(){
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return this.fechaNacimiento.format(formato);
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        return formato.format(this.fechaNacimiento);
     }
 
     /**
@@ -73,8 +74,8 @@ public abstract class Persona {
      */
     protected void setFechaNacimiento(String fecha){
         try {
-            DateTimeFormatter formatoDDMM = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            this.fechaNacimiento = LocalDate.parse(fecha, formatoDDMM);
+            SimpleDateFormat formatoDDMM = new SimpleDateFormat("dd/MM/yyyy");
+            this.fechaNacimiento = formatoDDMM.parse(fecha);
         } catch (Exception e) {
             System.out.println("la fecha de nacimento " + fecha + " no sigue con el formato dd/MM/yyyy");
         }
@@ -105,5 +106,3 @@ public abstract class Persona {
     protected void setCorreoElectronico(String correoElectronico){ this.correoElectronico = correoElectronico;}
 
 }
-
-
